@@ -29,7 +29,7 @@ namespace Bierpong_2
                 }
                 else
                 {
-                    ///
+                    //
                 }
 
                 if (CaptainOrTeamNameIsNotEmptyOrNull(cptname))
@@ -38,7 +38,7 @@ namespace Bierpong_2
                 }
                 else
                 {
-                    ///
+                    //
                 }
                 AddTeamToTheList(this);
             }
