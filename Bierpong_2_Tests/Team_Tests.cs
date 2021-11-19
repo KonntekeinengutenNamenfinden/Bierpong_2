@@ -6,7 +6,7 @@ namespace Bierpong_2_Tests
 {
     public class Team_Tests
     {
-        private Team MakeTeam(string tmn = "Alkoholis", string cptn = "Egon")
+        public static Team MakeTeam(string tmn = "Alkoholis", string cptn = "Egon")
         {
             return new Team(tmn, cptn);
         }
@@ -17,7 +17,7 @@ namespace Bierpong_2_Tests
         [TestCase("", false)]
         public void CaptainOrTeamNameNotEmptyOrNull_Various_CheckThem(string name, bool expected)
         {
-             Team myTeam = MakeTeam(name);
+            Team myTeam = MakeTeam(name);
 
             bool result = myTeam.CaptainOrTeamNameIsNotEmptyOrNull(name);
 
@@ -90,8 +90,9 @@ namespace Bierpong_2_Tests
         {
             Team myt = MakeTeam();
 
+            int teamCountBeforeDelete = Team.AlleTeams.Count;
             myt.DeleteTeamFromTheList();
-            bool result = (Team.AlleTeams.Count == 0);
+            bool result = Team.AlleTeams.Count < teamCountBeforeDelete;
 
             Assert.IsTrue(result);
 
