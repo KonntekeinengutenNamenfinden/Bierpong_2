@@ -15,7 +15,10 @@ namespace Bierpong_2
     {
         public string Kapitän;
         public string Teamname;
-        public int GruppenphasePunkte;
+        public int GruppenphasePunkte = 0;
+        public int GruppenphaseTreffer = 0;
+        public int GruppenphaseGegentreffer = 0;
+        public int GruppenphaseTordifferenz = 0;
 
         public static List<Team> AlleTeams = new();
 
@@ -129,6 +132,73 @@ namespace Bierpong_2
         public void SubstractGroupphasePoints()
         {
             GruppenphasePunkte -= 3;
+        }
+
+        /// <summary>
+        /// Füge "GruppenphaseTreffer" für ein Team hinzu.
+        /// </summary>
+        /// <param name="hits"></param>
+        public void AddHits(int hits)
+        {
+            GruppenphaseTreffer += hits;
+        }
+
+        /// <summary>
+        /// Ziehe GruppenphaseTreffer für ein Team ab.
+        /// Überprüfe vorher: "HitsNotSmaller0AfterSub".
+        /// </summary>
+        /// <param name="subHits"></param>
+        public void SubHits(int subHits)
+        {
+            if (HitsNotSmaller0AfterSub(subHits))
+            {
+                GruppenphaseTreffer -= subHits;
+            }
+
+        }
+
+        /// <summary>
+        /// Wenn die "GruppenphaseTreffer" nach Abzug von Treffern unter 0 fallen könnte,
+        /// dann führe den Abzug der Treffer nicht aus.
+        /// </summary>
+        /// <param name="subHits"></param>
+        /// <returns></returns>
+        public bool HitsNotSmaller0AfterSub(int subHits)
+        {
+            if (GruppenphaseTreffer - subHits >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Füge "Gegentreffer" für ein Team hinzu.
+        /// </summary>
+        /// <param name="antihits"></param>
+        public void AddAntiHits(int antihits)
+        {
+            GruppenphaseGegentreffer += antihits;
+        }
+
+        /// <summary>
+        /// Ziehe "Gegentreffer" für ein Team ab.
+        /// </summary>
+        /// <param name="antihits"></param>
+        public void SubAntiHits(int antihits)
+        {
+            GruppenphaseGegentreffer -= antihits;
+        }
+
+        /// <summary>
+        /// Zeige die Tordifferenz eines Teams.
+        /// </summary>
+        public int GetHitDifference()
+        {
+            return GruppenphaseTreffer - GruppenphaseGegentreffer;
         }
     }
 }

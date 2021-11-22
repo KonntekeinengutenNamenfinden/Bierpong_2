@@ -16,28 +16,28 @@ namespace Bierpong_2_Tests
         }
 
         [Test]
-        public void AddTeamToGroup_CheckIfTheMethodAddsATeamToTheGroup()
+        public void AddTeamToGroup_CheckIfTheMethodAddsATeamToTheGroup_True()
         {
             Team tm = Team_Tests.MakeTeam();
             Gruppe grp = MakeGroup();
             int TeamsVorher = grp.AktiveTeams;
 
             grp.AddTeamToGroup(tm);
-            bool result = TeamsVorher < Gruppe.TeamsInGruppe.Count;
+            bool result = TeamsVorher < grp.AktiveTeams;
 
             Assert.IsTrue(result);
         }
 
         [Test]
-        public void SubTeamFromTheGroup_CheckIfTheMethodSubsATeamFromTheGroup()
+        public void SubTeamFromTheGroup_CheckIfTheMethodSubsATeamFromTheGroup_True()
         {
             Team tm = Team_Tests.MakeTeam();
             Gruppe grp = MakeGroup();
 
             grp.AddTeamToGroup(tm);
-            int TeamsVorher = Gruppe.TeamsInGruppe.Count;
+            int TeamsVorher = grp.AktiveTeams;
             grp.SubTeamFromGroup(tm);
-            bool result = TeamsVorher > Gruppe.TeamsInGruppe.Count;
+            bool result = TeamsVorher > grp.AktiveTeams;
 
             Assert.IsTrue(result);
         }

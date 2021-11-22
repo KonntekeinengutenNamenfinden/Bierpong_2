@@ -11,7 +11,7 @@ namespace Bierpong_2
         public string Gruppenname;
         public int AktiveTeams = 0;
 
-        public static List<Team> TeamsInGruppe = new();
+        public List<Team> TeamsInGruppe = new();
 
         public Gruppe(string grpn)
         {

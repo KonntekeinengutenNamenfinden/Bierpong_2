@@ -97,5 +97,62 @@ namespace Bierpong_2_Tests
             Assert.IsTrue(result);
 
         }
+
+        [Test]
+        public void AddHits_CheckIfTheMethodAddTheHitsForTheTeam_ReturnTrue()
+        {
+            Team tm = MakeTeam();
+
+            tm.AddHits(4);
+            bool result = tm.GruppenphaseTreffer == 4;
+
+            Assert.IsTrue(result);
+        }
+
+        [TestCase(10, false)]
+        [TestCase(3, true)]
+        [TestCase(5, true)]
+        public void SubHits_VariousChecks_CheckThem(int SubHits, bool expected)
+        {
+            Team tm = MakeTeam();
+            tm.GruppenphaseTreffer = 5;
+            int tmp = tm.GruppenphaseTreffer;
+
+            tm.SubHits(SubHits);
+            bool result = tmp > tm.GruppenphaseTreffer;
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase(10, false)]
+        [TestCase(3, true)]
+        [TestCase(5, true)]
+        [TestCase(6, false)]
+        public void HitsNotSmaller0AfterSub_VariousChecks_CheckThem(int SubHits, bool expected)
+        {
+            Team tm = MakeTeam();
+            tm.GruppenphaseTreffer = 5;
+
+            bool result =tm.HitsNotSmaller0AfterSub(SubHits);
+
+            Assert.AreEqual(expected, result);
+        }
+
+
+        [TestCase(7,10)]
+        [TestCase(11, 9)]
+        [TestCase(1,21)]
+        [TestCase(21, 1)]
+        public void GetHitDifference_VariousChecks_CheckThem(int Hits, int AntiHits)
+        {
+            Team myt = MakeTeam();
+            myt.GruppenphaseTreffer = Hits;
+            myt.GruppenphaseGegentreffer = AntiHits;
+
+            int difference = Hits - AntiHits;
+            bool result = difference == myt.GetHitDifference();
+
+            Assert.IsTrue(result);
+        }
     }
 }
