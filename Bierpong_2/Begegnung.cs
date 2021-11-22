@@ -13,6 +13,7 @@ namespace Bierpong_2
         public int HitsTeamA;
         public int HitsTeamB;
         public Team Sieger;
+        public Team Verlierer;
 
         string Ergebnis;
 
@@ -35,15 +36,17 @@ namespace Bierpong_2
         /// <summary>
         /// Ermittle den Gewinner der Begegnung.
         /// </summary>
-        public void DetermineWinner()
+        public void DetermineWinnerAndLoser()
         {
             if(HitsTeamA > HitsTeamB && NoDraw())
             {
                 Sieger = BeideTeams[0];
+                Verlierer = BeideTeams[1];
             }
             else if(HitsTeamB > HitsTeamA && NoDraw())
             {
                 Sieger = BeideTeams[1];
+                Verlierer = BeideTeams[0];
             }
         }
 
@@ -61,6 +64,11 @@ namespace Bierpong_2
             {
                 return true;
             }
+        }
+
+        public string WriteTheResult()
+        {
+            return BeideTeams[0].Teamname + "   " + HitsTeamA + "   -   " + HitsTeamB + "   " + BeideTeams[1].Teamname;
         }
     }
 }

@@ -29,14 +29,14 @@ namespace Bierpong_2_Tests
         [TestCase(11, 4, true)]
         [TestCase(11, 11, false)]
         [TestCase(10, 9, true)]
-        public void DetermineWinner_CheckIfTheMethodCanDetermineTheWinnerCorrectly_VariousCheks(int hitA, int hitB, bool expected)
+        public void DetermineWinnerAndLoser_CheckIfTheMethodCanDetermineTheWinnerCorrectly_VariousCheks(int hitA, int hitB, bool expected)
         {
             Begegnung match = MakeBMatch();
             match.HitsTeamA = hitA;
             match.HitsTeamB = hitB;
 
-            match.DetermineWinner();
-            bool result = match.Sieger == match.BeideTeams[0];
+            match.DetermineWinnerAndLoser();
+            bool result = match.Sieger == match.BeideTeams[0] && match.Verlierer == match.BeideTeams[1];
 
             Assert.AreEqual(expected, result);
         }
@@ -45,7 +45,7 @@ namespace Bierpong_2_Tests
         [TestCase(5, 5, false)]
         [TestCase(0, 0, false)]
         [TestCase(4, 9, true)]
-        public void NoDraw_CheckIfMatchEndsDraw_VariousChecks(int hitA, int hitB, bool expected)
+        public void NoDraw_CheckIfMatchCanEndsDraw_VariousChecks(int hitA, int hitB, bool expected)
         {
             Begegnung match = MakeBMatch();
             match.HitsTeamA = hitA;
@@ -54,6 +54,11 @@ namespace Bierpong_2_Tests
             bool result = match.NoDraw();
 
             Assert.AreEqual(expected, result);
+
+        }
+
+        public void WriteTheResult()
+        {
 
         }
     }
