@@ -138,9 +138,13 @@ namespace Bierpong_2
         /// Füge "GruppenphaseTreffer" für ein Team hinzu.
         /// </summary>
         /// <param name="hits"></param>
-        public void AddHits(int hits)
+        public void AddHits(string hits)
         {
-            GruppenphaseTreffer += hits;
+            if (UserDontInsertNegativeIntsOrLetters(hits))
+            {
+                GruppenphaseTreffer += int.Parse(hits);
+            }
+
         }
 
         /// <summary>
@@ -148,11 +152,11 @@ namespace Bierpong_2
         /// Überprüfe vorher: "HitsNotSmaller0AfterSub".
         /// </summary>
         /// <param name="subHits"></param>
-        public void SubHits(int subHits)
+        public void SubHits(string subHits)
         {
-            if (HitsNotSmaller0AfterSub(subHits))
+            if (UserDontInsertNegativeIntsOrLetters(subHits) && HitsNotSmaller0AfterSub(subHits))
             {
-                GruppenphaseTreffer -= subHits;
+                GruppenphaseTreffer -= int.Parse(subHits);
             }
 
         }
@@ -163,9 +167,9 @@ namespace Bierpong_2
         /// </summary>
         /// <param name="subHits"></param>
         /// <returns></returns>
-        public bool HitsNotSmaller0AfterSub(int subHits)
+        public bool HitsNotSmaller0AfterSub(string subHits)
         {
-            if (GruppenphaseTreffer - subHits >= 0)
+            if (GruppenphaseTreffer - int.Parse(subHits) >= 0)
             {
                 return true;
             }
@@ -181,9 +185,9 @@ namespace Bierpong_2
         /// </summary>
         /// <param name="subAntiHits"></param>
         /// <returns></returns>
-        public bool AntiHitsNotSmaller0AfterSub(int subAntiHits)
+        public bool AntiHitsNotSmaller0AfterSub(string subAntiHits)
         {
-            if (GruppenphaseGegentreffer - subAntiHits >= 0)
+            if (GruppenphaseGegentreffer - int.Parse(subAntiHits) >= 0)
             {
                 return true;
             }
@@ -197,20 +201,24 @@ namespace Bierpong_2
         /// Füge "Gegentreffer" für ein Team hinzu.
         /// </summary>
         /// <param name="antihits"></param>
-        public void AddAntiHits(int antihits)
+        public void AddAntiHits(string antihits)
         {
-            GruppenphaseGegentreffer += antihits;
+            if (UserDontInsertNegativeIntsOrLetters(antihits))
+            {
+                GruppenphaseGegentreffer += int.Parse(antihits);
+            }
+
         }
 
         /// <summary>
         /// Ziehe "Gegentreffer" für ein Team ab.
         /// </summary>
         /// <param name="antihits"></param>
-        public void SubAntiHits(int antihits)
+        public void SubAntiHits(string antihits)
         {
-            if (AntiHitsNotSmaller0AfterSub(antihits))
+            if (UserDontInsertNegativeIntsOrLetters(antihits) && AntiHitsNotSmaller0AfterSub(antihits))
             {
-                GruppenphaseGegentreffer -= antihits;
+                GruppenphaseGegentreffer -= int.Parse(antihits);
             }
 
         }
@@ -223,9 +231,26 @@ namespace Bierpong_2
             return GruppenphaseTreffer - GruppenphaseGegentreffer;
         }
 
-        public bool UserDontInsertNegativeInts()
+        /// <summary>
+        /// Wird aufgerufen, wenn der Benutzer die Werte "GruppenphaseTreffer" oder "Gegentreffer" verändern möchte.
+        /// Sollte er Buchstaben oder eine negative Zahl eingeben, wird die Änderung nicht durchgeführt.
+        /// </summary>
+        /// <param name="insert"></param>
+        /// <returns></returns>
+        public bool UserDontInsertNegativeIntsOrLetters(string insert)
         {
-
+            if (int.TryParse(insert, out int zahl))
+            {
+                if (zahl >= 0)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

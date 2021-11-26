@@ -103,7 +103,7 @@ namespace Bierpong_2_Tests
         {
             Team tm = MakeTeam();
 
-            tm.AddHits(4);
+            tm.AddHits("4");
             bool result = tm.GruppenphaseTreffer == 4;
 
             Assert.IsTrue(result);
@@ -118,7 +118,7 @@ namespace Bierpong_2_Tests
             tm.GruppenphaseTreffer = 5;
             int tmp = tm.GruppenphaseTreffer;
 
-            tm.SubHits(SubHits);
+            tm.SubHits(SubHits.ToString());
             bool result = tmp > tm.GruppenphaseTreffer;
 
             Assert.AreEqual(expected, result);
@@ -131,9 +131,10 @@ namespace Bierpong_2_Tests
         {
             Team myt = MakeTeam();
             myt.GruppenphaseGegentreffer = 5;
+            int tmp = myt.GruppenphaseGegentreffer;
 
-            myt.AddAntiHits(AddAntiHits);
-            bool result = myt.GruppenphaseGegentreffer > AddAntiHits;
+            myt.AddAntiHits(AddAntiHits.ToString());
+            bool result = myt.GruppenphaseGegentreffer > tmp;
 
             Assert.AreEqual(expected, result);
         }
@@ -145,8 +146,11 @@ namespace Bierpong_2_Tests
         {
             Team myt = MakeTeam();
             myt.GruppenphaseGegentreffer = 5;
+            myt.SubAntiHits(SubAntiHits.ToString());
 
-            bool result ;
+            bool result = myt.GruppenphaseGegentreffer < 5;
+
+            Assert.AreEqual(expected, result);
         }
 
         [TestCase(10, false)]
@@ -158,7 +162,7 @@ namespace Bierpong_2_Tests
             Team tm = MakeTeam();
             tm.GruppenphaseTreffer = 5;
 
-            bool result =tm.HitsNotSmaller0AfterSub(SubHits);
+            bool result =tm.HitsNotSmaller0AfterSub(SubHits.ToString());
 
             Assert.AreEqual(expected, result);
         }
@@ -172,11 +176,10 @@ namespace Bierpong_2_Tests
             Team myt = MakeTeam();
             myt.GruppenphaseGegentreffer = 5;
 
-            bool result = myt.AntiHitsNotSmaller0AfterSub(SubAntiHits);
+            bool result = myt.AntiHitsNotSmaller0AfterSub(SubAntiHits.ToString());
 
             Assert.AreEqual(expected, result);
         }
-
 
         [TestCase(7,10)]
         [TestCase(11, 9)]
@@ -192,6 +195,20 @@ namespace Bierpong_2_Tests
             bool result = difference == myt.GetHitDifference();
 
             Assert.IsTrue(result);
+        }
+
+        [TestCase("4", true)]
+        [TestCase("heh", false)]
+        [TestCase("", false)]
+        [TestCase("-4", false)]
+        [TestCase("                 5                ", true)]
+        public void UserDontInsertNegativeIntsOrLetters_VariousChecks_CheckThem(string eingabe, bool expected)
+        {
+            Team myt = MakeTeam();
+
+            bool result = myt.UserDontInsertNegativeIntsOrLetters(eingabe);
+
+            Assert.AreEqual(expected, result);
         }
     }
 }
