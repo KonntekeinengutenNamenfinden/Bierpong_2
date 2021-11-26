@@ -18,7 +18,7 @@ namespace Bierpong_2_Tests
         [Test]
         public void AddTeamsToTheList_CheckIfTheMethodAddsThe2TeamsToTheMatchList_True()
         {
-            Begegnung match = new Begegnung(new Team("AL", "Fritz"), new Team("BR", "Egon"));
+            Begegnung match = new(new Team("AL", "Fritz"), new Team("BR", "Egon"));
 
             bool result = match.BeideTeams.Count == 2;
 
