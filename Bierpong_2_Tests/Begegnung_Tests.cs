@@ -10,7 +10,7 @@ namespace Bierpong_2_Tests
 {
     public class Begegnung_Tests
     {
-        public Begegnung MakeBMatch()
+        public Begegnung MakeMatch()
         {
             return new Begegnung(new Team("Alpha", "Fritz"), new Team("Bravo", "Egon"));
         }
@@ -31,7 +31,7 @@ namespace Bierpong_2_Tests
         [TestCase(10, 9, true)]
         public void DetermineWinnerAndLoser_CheckIfTheMethodCanDetermineTheWinnerCorrectly_VariousCheks(int hitA, int hitB, bool expected)
         {
-            Begegnung match = MakeBMatch();
+            Begegnung match = MakeMatch();
             match.HitsTeamA = hitA;
             match.HitsTeamB = hitB;
 
@@ -47,19 +47,13 @@ namespace Bierpong_2_Tests
         [TestCase(4, 9, true)]
         public void NoDraw_CheckIfMatchCanEndsDraw_VariousChecks(int hitA, int hitB, bool expected)
         {
-            Begegnung match = MakeBMatch();
+            Begegnung match = MakeMatch();
             match.HitsTeamA = hitA;
             match.HitsTeamB = hitB;
 
             bool result = match.NoDraw();
 
             Assert.AreEqual(expected, result);
-
-        }
-
-        public void WriteTheResult()
-        {
-
         }
     }
 }

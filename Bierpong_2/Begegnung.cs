@@ -15,7 +15,7 @@ namespace Bierpong_2
         public Team Sieger;
         public Team Verlierer;
 
-        string Ergebnis;
+        public string Ergebnis;
 
         public Begegnung(Team a, Team b)
         {
@@ -66,6 +66,10 @@ namespace Bierpong_2
             }
         }
 
+        /// <summary>
+        /// Gib ein leicht formatierten String als Ergebnis zurück.
+        /// </summary>
+        /// <returns></returns>
         public string WriteTheResult()
         {
             return BeideTeams[0].Teamname + "   " + HitsTeamA + "   -   " + HitsTeamB + "   " + BeideTeams[1].Teamname;

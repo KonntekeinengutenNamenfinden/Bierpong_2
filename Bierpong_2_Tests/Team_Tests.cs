@@ -124,6 +124,31 @@ namespace Bierpong_2_Tests
             Assert.AreEqual(expected, result);
         }
 
+        [TestCase(-4, false)]
+        [TestCase(0, false)]
+        [TestCase(5, true)]
+        public void AddAntiHits_VariousChecks_CheckThem(int AddAntiHits, bool expected)
+        {
+            Team myt = MakeTeam();
+            myt.GruppenphaseGegentreffer = 5;
+
+            myt.AddAntiHits(AddAntiHits);
+            bool result = myt.GruppenphaseGegentreffer > AddAntiHits;
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase(10, false)]
+        [TestCase(3, true)]
+        [TestCase(0, false)]
+        public void SubAntiHits_VariousChecks_CheckThem(int SubAntiHits, bool expected)
+        {
+            Team myt = MakeTeam();
+            myt.GruppenphaseGegentreffer = 5;
+
+            bool result ;
+        }
+
         [TestCase(10, false)]
         [TestCase(3, true)]
         [TestCase(5, true)]
@@ -134,6 +159,20 @@ namespace Bierpong_2_Tests
             tm.GruppenphaseTreffer = 5;
 
             bool result =tm.HitsNotSmaller0AfterSub(SubHits);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase(5, true)]
+        [TestCase(4, true)]
+        [TestCase(6, false)]
+        [TestCase(10, false)]
+        public void AntiHitsNotSmaller0AfterSub_VariousChecks_CheckThem(int SubAntiHits, bool expected)
+        {
+            Team myt = MakeTeam();
+            myt.GruppenphaseGegentreffer = 5;
+
+            bool result = myt.AntiHitsNotSmaller0AfterSub(SubAntiHits);
 
             Assert.AreEqual(expected, result);
         }

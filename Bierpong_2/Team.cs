@@ -176,6 +176,24 @@ namespace Bierpong_2
         }
 
         /// <summary>
+        /// Wenn die "Gruppenphasegegentreffer nach Abzug von Gegentreffern unter 0 fallen könnte,
+        /// dann führe den Abzug der gegentreffer nicht aus.
+        /// </summary>
+        /// <param name="subAntiHits"></param>
+        /// <returns></returns>
+        public bool AntiHitsNotSmaller0AfterSub(int subAntiHits)
+        {
+            if (GruppenphaseGegentreffer - subAntiHits >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Füge "Gegentreffer" für ein Team hinzu.
         /// </summary>
         /// <param name="antihits"></param>
@@ -190,7 +208,11 @@ namespace Bierpong_2
         /// <param name="antihits"></param>
         public void SubAntiHits(int antihits)
         {
-            GruppenphaseGegentreffer -= antihits;
+            if (AntiHitsNotSmaller0AfterSub(antihits))
+            {
+                GruppenphaseGegentreffer -= antihits;
+            }
+
         }
 
         /// <summary>
@@ -199,6 +221,11 @@ namespace Bierpong_2
         public int GetHitDifference()
         {
             return GruppenphaseTreffer - GruppenphaseGegentreffer;
+        }
+
+        public bool UserDontInsertNegativeInts()
+        {
+
         }
     }
 }
