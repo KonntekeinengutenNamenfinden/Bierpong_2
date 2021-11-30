@@ -210,5 +210,20 @@ namespace Bierpong_2_Tests
 
             Assert.AreEqual(expected, result);
         }
+
+        [TestCase("11", true)]
+        [TestCase("5", true)]
+        [TestCase("", false)]
+        [TestCase("heh", false)]
+        [TestCase("0", true)]
+        [TestCase("22", false)]
+        public void UserDontTryToAddMoreThan13HitsFor1Match_VariousChecks_CheckThem(string eingabe, bool expected)
+        {
+            Team myt = MakeTeam();
+
+            bool result = myt.UserDontTryToAddMoreThan13HitsFor1Match(eingabe);
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }

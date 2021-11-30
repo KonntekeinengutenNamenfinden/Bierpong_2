@@ -252,5 +252,30 @@ namespace Bierpong_2
                 return false;
             }
         }
+
+        /// <summary>
+        /// Innerhalb eines Matches kann ein Team höchstens 13 Treffer landen.
+        /// Wenn der Benutzer mehr als 13 Treffer hinzufügen will: Unterbinde es.
+        /// </summary>
+        /// <param name="insert"></param>
+        /// <returns></returns>
+        public bool UserDontTryToAddMoreThan13HitsFor1Match(string insert)
+        {
+            if (UserDontInsertNegativeIntsOrLetters(insert))
+            {
+                if(int.Parse(insert) <= 13)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
